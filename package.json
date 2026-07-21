@@ -1,0 +1,25 @@
+{
+  "name": "VeteRan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Server.js",
+  "scripts": {
+    "client": "pnpm --filter client dev",
+    "server": "pnpm --filter Server dev",
+    "dev": "concurrently \"pnpm client\" \"pnpm server\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.13.1",
+      "onFail": "download"
+    }
+  },
+  "type": "module",
+  "devDependencies": {
+    "concurrently": "^10.0.3"
+  }
+}
