@@ -181,20 +181,49 @@ export default function RenewedHopeVeterans() {
       </section>
 
       {/* --- 2. Trusted By Partners (Marquee effect) --- */}
-      <section className="py-8 bg-white border-b border-slate-200 overflow-hidden relative">
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-white to-transparent z-10"></div>
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-white to-transparent z-10"></div>
-        <div className="flex w-[200%] animate-[marquee_20s_linear_infinite] items-center gap-24 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-          {[1, 2].map((set) => (
-            <React.Fragment key={set}>
-              <div className="flex items-center gap-3 font-extrabold text-xl text-slate-800"><Building className="w-8 h-8 text-[#0b3d2e]" /> Ministry of Defense</div>
-              <div className="flex items-center gap-3 font-extrabold text-xl text-slate-800"><ShieldCheck className="w-8 h-8 text-[#c9a227]" /> Civic Union</div>
-              <div className="flex items-center gap-3 font-extrabold text-xl text-slate-800"><Handshake className="w-8 h-8 text-[#0b3d2e]" /> Veterans Trust</div>
-              <div className="flex items-center gap-3 font-extrabold text-xl text-slate-800"><Landmark className="w-8 h-8 text-[#c9a227]" /> National Assembly</div>
-            </React.Fragment>
-          ))}
-        </div>
-      </section>
+    <section className="relative overflow-hidden border-b border-slate-200 bg-white py-8">
+  {/* Fade edges */}
+  <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-white to-transparent" />
+  <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-white to-transparent" />
+
+  <div className="flex whitespace-nowrap">
+    <div className="flex animate-marquee items-center gap-24">
+      {[1, 2].map((set) => (
+        <React.Fragment key={set}>
+          <div className="flex items-center gap-3 text-xl font-extrabold text-slate-800">
+            <ShieldCheck className="h-8 w-8 text-[#c9a227]" />
+            Civic Union
+          </div>
+
+          <div className="flex items-center gap-3 text-xl font-extrabold text-slate-800">
+            <Handshake className="h-8 w-8 text-[#0b3d2e]" />
+            Veterans Trust
+          </div>
+        </React.Fragment>
+      ))}
+    </div>
+
+    {/* Duplicate for seamless scrolling */}
+    <div
+      className="flex animate-marquee items-center gap-24 pl-24"
+      aria-hidden="true"
+    >
+      {[1, 2].map((set) => (
+        <React.Fragment key={set}>
+          <div className="flex items-center gap-3 text-xl font-extrabold text-slate-800">
+            <ShieldCheck className="h-8 w-8 text-[#c9a227]" />
+            Civic Union
+          </div>
+
+          <div className="flex items-center gap-3 text-xl font-extrabold text-slate-800">
+            <Handshake className="h-8 w-8 text-[#0b3d2e]" />
+            Veterans Trust
+          </div>
+        </React.Fragment>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* --- 3. Who We Are --- */}
       <section id="who-we-are" className="py-24 relative">

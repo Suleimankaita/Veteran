@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { 
   Mail, Phone, 
@@ -6,6 +6,7 @@ import {
   Archive, Handshake, Map, Landmark, Flag, MapPin, Menu, X, Sparkles, CheckCircle2,
   ShieldCheck
 } from 'lucide-react';
+import { Navigate, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 interface NavItem {
   label: string;
@@ -15,13 +16,13 @@ interface NavItem {
 }
 
 const NAV_LINKS: NavItem[] = [
-  { label: 'Home', href: '#', isActive: true },
-  { label: 'About Us', href: '#' },
-  { label: 'Our Structure', href: '#', hasDropdown: true },
-  { label: 'Our Mission', href: '#' },
-  { label: 'Programs', href: '#' },
-  { label: 'Resources', href: '#', hasDropdown: true },
-  { label: 'Gallery', href: '#' },
+  { label: 'Home', href: '/', isActive: true },
+  { label: 'About Us', href: '/about' },
+  { label: 'Our Structure', href: '/our-structure', hasDropdown: true },
+  { label: 'Our Mission', href: '/our-mission' },
+  { label: 'Programs', href: '/programs' },
+  { label: 'Resources', href: '/resources', hasDropdown: true },
+  { label: 'Gallery', href: '/gallery' },
 ];
 
 const mobileMenuVariants: Variants = {
@@ -31,10 +32,13 @@ const mobileMenuVariants: Variants = {
 
 const Header = () => {
       const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
-    
+      const pathname=useLocation()
+      useEffect(()=>{
+        console.log(pathname.pathname)
+      },[pathname])
   return (
     <>
-    <div className="bg-[#072B12] text-slate-200 text-xs py-2.5 px-4 md:px-12 border-b border-emerald-900/50">
+    <div className="bg-[#072B12] text-slate-200 text-xs py-3.5 px-4 md:px-12 border-b border-emerald-900/50">
             <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-2">
               <div className="flex items-center space-x-6">
                 <a href="mailto:info@renewedhopeveterans.ng" className="flex items-center hover:text-amber-400 transition-colors duration-200">
@@ -100,22 +104,22 @@ const Header = () => {
           {/* Desktop Nav Links */}
           <div className="hidden lg:flex items-center space-x-8 text-sm font-semibold text-slate-700">
             {NAV_LINKS.map((link, idx) => (
-              <a 
+              <NavLink 
                 key={idx} 
-                href={link.href} 
+                to={link.href} 
                 className={`relative py-1 flex items-center hover:text-emerald-800 transition-colors duration-200 ${
-                    link.isActive ? 'text-emerald-900 font-bold' : ''
+                    link.href===pathname.pathname ? 'text-emerald-900 font-bold' : ''
                 }`}
               >
                 {link.label}
                 {link.hasDropdown && <ChevronDown className="w-4 h-4 ml-1 opacity-70" />}
-                {link.isActive && (
+                {link.href===pathname.pathname && (
                   <motion.div 
                     layoutId="activeNavIndicator"
                     className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full"
                   />
                 )}
-              </a>
+              </NavLink>
             ))}
           </div>
 
