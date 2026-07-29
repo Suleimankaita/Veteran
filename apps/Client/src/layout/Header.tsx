@@ -18,10 +18,10 @@ interface NavItem {
 const NAV_LINKS: NavItem[] = [
   { label: 'Home', href: '/', isActive: true },
   { label: 'About Us', href: '/about' },
-  { label: 'Our Structure', href: '/our-structure', hasDropdown: true },
+  { label: 'Our Structure', href: '/our-structure', hasDropdown: false },
   { label: 'Our Mission', href: '/our-mission' },
   { label: 'Programs', href: '/programs' },
-  { label: 'Resources', href: '/resources', hasDropdown: true },
+  { label: 'Resources', href: '/resources', hasDropdown: false },
   { label: 'Gallery', href: '/gallery' },
 ];
 
