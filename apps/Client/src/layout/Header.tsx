@@ -157,14 +157,22 @@ const Header = () => {
             >
               <div className="px-6 py-4 flex flex-col space-y-3">
                 {NAV_LINKS.map((link, idx) => (
-                  <a 
-                    key={idx} 
-                    href={link.href} 
-                    className="text-slate-800 font-medium py-2 flex justify-between items-center border-b border-slate-50 hover:text-emerald-800"
-                  >
-                    <span>{link.label}</span>
-                    {link.hasDropdown && <ChevronDown className="w-4 h-4 text-slate-400" />}
-                  </a>
+                   <NavLink 
+                key={idx} 
+                to={link.href} 
+                className={`relative py-1 flex items-center hover:text-emerald-800 transition-colors duration-200 ${
+                    link.href===pathname.pathname ? 'text-emerald-900 font-bold' : ''
+                }`}
+              >
+                {link.label}
+                {link.hasDropdown && <ChevronDown className="w-4 h-4 ml-1 opacity-70" />}
+                {link.href===pathname.pathname && (
+                  <motion.div 
+                    layoutId="activeNavIndicator"
+                    className="absolute w-20 bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-amber-400 to-amber-600 rounded-full"
+                  />
+                )}
+              </NavLink>
                 ))}
                 <button className="w-full mt-2 bg-[#0B3B18] text-white py-3 rounded-lg font-semibold flex items-center justify-center shadow-md">
                   <User className="w-4 h-4 mr-2 text-amber-400" />
