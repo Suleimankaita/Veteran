@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, Share2, ArrowRight, X, ChevronLeft, ChevronRight, Calendar, Users, Heart, ExternalLink, Filter, Check, Copy } from 'lucide-react';
-
+import hero from '../assets/Gl.png';
 // --- Types ---
 interface Photo {
   id: number;
@@ -169,9 +169,10 @@ export default function GalleryPage() {
       <section className="relative h-screen min-h-[650px] flex items-center justify-center overflow-hidden bg-[#0F2744]">
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <img 
-            src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=2000" 
+            src={hero} 
+            // src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=2000" 
             alt="Background Network Journey" 
-            className="w-full h-full object-cover object-center scale-105 opacity-40 animate-subtle-pan mix-blend-overlay"
+            className="w-full h-full object-cover object-center scale-105 opacity-55  animate-subtle-pan mix-blend-overlay"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#0F2744]/40 via-[#0F2744]/70 to-[#F8F9FA]"></div>
         </div>

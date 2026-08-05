@@ -1,9 +1,11 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import {
   CheckCircle2, Users, Target, ShieldCheck, Heart, 
   Flag, Award, Lock, Users2, Mail, Check,
-  ChevronRight, 
+  ChevronRight, ChevronDown
 } from 'lucide-react';
+import hero from '../assets/gl4.png'
 
 // --- DATA CONSTANTS ---
 
@@ -32,43 +34,96 @@ const TIMELINE = [
   { year: '2023', title: 'Community Projects Integration', desc: 'Shifted focus to active community development, launching grassroots initiatives nationwide.' },
 ];
 
+// --- ANIMATION VARIANTS ---
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2, delayChildren: 0.2 }
+  }
+};
+
+const fadeUpItem = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } 
+  }
+};
+
 // --- MAIN COMPONENT ---
 
 export default function AboutPage() {
   return (
     <div className="font-sans text-gray-800 bg-gray-50 min-h-screen">
       
-      {/* HEADER / NAVIGATION */}
+      {/* HEADER / NAVIGATION Placeholder */}
       
-
-      {/* 1. ABOUT HERO SECTION */}
-      <section className="relative bg-emerald-950 text-white pt-40 pb-24 flex flex-col justify-center items-center text-center">
-        <div className="absolute inset-0 z-0">
+      {/* 1. UPGRADED ABOUT HERO SECTION */}
+      <section className="relative w-full h-[85vh] min-h-[600px] bg-emerald-950 flex flex-col justify-center items-center text-center overflow-hidden">
+        
+        {/* Animated Background Image (Slow Zoom Effect) */}
+        <motion.div 
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute inset-0 z-0"
+        >
           <img 
-            src="https://images.unsplash.com/photo-1593113565694-c6b758835848?auto=format&fit=crop&q=80" 
+            src={hero} 
             alt="Veterans Community" 
-            className="w-full h-full object-cover opacity-20 mix-blend-overlay"
+            className="w-full h-full object-cover  mix-blend-luminosity"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-emerald-950 via-emerald-950/90 to-emerald-950"></div>
-        </div>
+          {/* Enhanced Gradient Overlays for perfect text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-emerald-950/80 via-emerald-950/40 to-emerald-950"></div>
+          <div className="absolute inset-0 bg-emerald-950/20 mix-blend-overlay"></div>
+        </motion.div>
 
-        <div className="relative z-10 container mx-auto px-6 max-w-4xl space-y-6">
-          <div className="flex items-center justify-center space-x-2 text-amber-500 text-sm font-bold uppercase tracking-widest mb-4">
-            <span>Home</span>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-emerald-200">About Us</span>
-          </div>
-          <h1 className="text-5xl lg:text-6xl font-extrabold leading-tight text-white drop-shadow-md">
-            Who We Are
-          </h1>
-          <p className="text-lg lg:text-xl text-emerald-100 leading-relaxed font-light">
+        {/* Animated Content Wrapper */}
+        <motion.div 
+          variants={staggerContainer}
+          initial="hidden"
+          animate="visible"
+          className="relative z-10 container mx-auto px-6 max-w-4xl flex flex-col items-center justify-center mt-12"
+        >
+          {/* Breadcrumb */}
+          <motion.div variants={fadeUpItem} className="flex items-center justify-center space-x-2 bg-emerald-900/50 backdrop-blur-md px-4 py-2 rounded-full border border-emerald-800/50 text-amber-500 text-xs font-bold uppercase tracking-widest mb-8">
+            <span className="hover:text-amber-400 cursor-pointer transition-colors">Home</span>
+            <ChevronRight className="w-3 h-3 text-emerald-400" />
+            <span className="text-emerald-100">About Us</span>
+          </motion.div>
+
+          {/* Main Headline */}
+          <motion.h1 variants={fadeUpItem} className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-white drop-shadow-2xl mb-6">
+            Who <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">We Are</span>
+          </motion.h1>
+
+          {/* Sub-headline */}
+          <motion.p variants={fadeUpItem} className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 leading-relaxed font-light max-w-3xl drop-shadow-md">
             Dedicated to empowering military veterans, strengthening communities, and contributing to national development through leadership, unity, and service.
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
+
+        {/* Floating Scroll Indicator */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 z-10 flex flex-col items-center text-emerald-400/70"
+        >
+          <span className="text-[10px] uppercase tracking-widest font-bold mb-2">Scroll to explore</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronDown className="w-6 h-6" />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* 2. OUR STORY */}
-      <section className="py-24 bg-white">
+      <section className="py-24 bg-white relative z-20">
         <div className="container mx-auto px-6 lg:px-16 flex flex-col lg:flex-row items-center gap-16">
           <div className="lg:w-1/2 space-y-8">
             <div>
@@ -96,8 +151,8 @@ export default function AboutPage() {
 
           <div className="lg:w-1/2 relative w-full">
             <div className="grid grid-cols-2 gap-4">
-              <img src="https://images.unsplash.com/photo-1594244589945-885ec37d38cc?auto=format&fit=crop&q=80" alt="Old military" className="rounded-2xl shadow-lg h-72 object-cover w-full grayscale" />
-              <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80" alt="Current community project" className="rounded-2xl shadow-lg h-72 object-cover w-full mt-12" />
+              <img src="https://images.unsplash.com/photo-1594244589945-885ec37d38cc?auto=format&fit=crop&q=80" alt="Old military" className="rounded-2xl shadow-lg h-72 object-cover w-full grayscale hover:grayscale-0 transition-all duration-500" />
+              <img src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?auto=format&fit=crop&q=80" alt="Current community project" className="rounded-2xl shadow-lg h-72 object-cover w-full mt-12 hover:scale-105 transition-all duration-500" />
             </div>
           </div>
         </div>
@@ -105,7 +160,7 @@ export default function AboutPage() {
 
       {/* 3. WHY WE EXIST & IDENTITY STRIP */}
       <section className="py-24 bg-emerald-950 text-center px-6 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1594244589945-885ec37d38cc?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+        <div className="absolute inset-0 opacity-10 bg-[url('https://images.unsplash.com/photo-1594244589945-885ec37d38cc?auto=format&fit=crop&q=80')] bg-cover bg-center fixed"></div>
         <div className="relative z-10 max-w-4xl mx-auto space-y-8">
           <h2 className="text-4xl lg:text-5xl font-extrabold text-amber-500 uppercase tracking-widest mb-10">Why We Exist</h2>
           <p className="text-3xl lg:text-4xl text-white font-light leading-snug">
@@ -120,7 +175,7 @@ export default function AboutPage() {
       {/* 4. VISION & MISSION */}
       <section className="py-24 bg-gray-50 relative -mt-10 z-20">
         <div className="container mx-auto px-6 lg:px-16 grid md:grid-cols-2 gap-8">
-          <div className="bg-white p-12 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center text-center">
+          <div className="bg-white p-12 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300">
             <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mb-6">
               <Target className="w-10 h-10 text-emerald-600" />
             </div>
@@ -129,7 +184,7 @@ export default function AboutPage() {
               To become Nigeria's most trusted veterans organization, promoting unity, leadership, service, and sustainable national development.
             </p>
           </div>
-          <div className="bg-white p-12 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center text-center">
+          <div className="bg-white p-12 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300">
             <div className="w-20 h-20 bg-amber-50 rounded-full flex items-center justify-center mb-6">
               <Flag className="w-10 h-10 text-amber-500" />
             </div>
@@ -151,8 +206,8 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {CORE_VALUES.map((val, idx) => (
-              <div key={idx} className="bg-gray-50 p-8 rounded-2xl border border-gray-100 text-center hover:bg-emerald-50 hover:border-emerald-200 transition-colors group">
-                <div className="w-16 h-16 bg-white shadow-sm text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:text-amber-500 transition-colors">
+              <div key={idx} className="bg-gray-50 p-8 rounded-2xl border border-gray-100 text-center hover:bg-emerald-50 hover:border-emerald-200 hover:-translate-y-2 transition-all duration-300 group cursor-pointer shadow-sm hover:shadow-md">
+                <div className="w-16 h-16 bg-white shadow-sm text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:text-amber-500 group-hover:scale-110 transition-all duration-300">
                   <val.icon className="w-8 h-8" />
                 </div>
                 <h4 className="text-xl font-bold text-emerald-950">{val.title}</h4>
@@ -169,20 +224,20 @@ export default function AboutPage() {
           <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-16">Our hierarchical framework ensures efficient communication, localized execution of projects, and nationwide cohesion.</p>
           
           <div className="flex flex-col items-center max-w-4xl mx-auto">
-            <div className="bg-emerald-900 text-white px-10 py-5 rounded-xl shadow-lg font-bold text-xl w-full max-w-sm">National Chairman</div>
+            <div className="bg-emerald-900 text-white px-10 py-5 rounded-xl shadow-lg font-bold text-xl w-full max-w-sm transform hover:scale-105 transition-transform duration-300">National Chairman</div>
             <div className="h-8 w-1 bg-amber-500"></div>
-            <div className="bg-emerald-800 text-white px-10 py-4 rounded-xl shadow-lg font-bold text-lg w-full max-w-md">National Executive Council</div>
+            <div className="bg-emerald-800 text-white px-10 py-4 rounded-xl shadow-lg font-bold text-lg w-full max-w-md transform hover:scale-105 transition-transform duration-300">National Executive Council</div>
             <div className="h-8 w-1 bg-amber-500"></div>
-            <div className="bg-emerald-700 text-white px-10 py-4 rounded-xl shadow-lg font-bold text-lg w-full max-w-lg">State Coordinators</div>
+            <div className="bg-emerald-700 text-white px-10 py-4 rounded-xl shadow-lg font-bold text-lg w-full max-w-lg transform hover:scale-105 transition-transform duration-300">State Coordinators</div>
             <div className="h-8 w-1 bg-amber-500"></div>
-            <div className="bg-emerald-600 text-white px-10 py-4 rounded-xl shadow-lg font-bold text-lg w-full max-w-xl">LGA Coordinators</div>
+            <div className="bg-emerald-600 text-white px-10 py-4 rounded-xl shadow-lg font-bold text-lg w-full max-w-xl transform hover:scale-105 transition-transform duration-300">LGA Coordinators</div>
             <div className="h-8 w-1 bg-amber-500"></div>
             <div className="w-full flex flex-col md:flex-row justify-center gap-4">
-               <div className="bg-emerald-500 text-white px-6 py-4 rounded-xl shadow-md font-semibold text-md w-full md:w-1/2">Ward Coordinators</div>
-               <div className="bg-emerald-500 text-white px-6 py-4 rounded-xl shadow-md font-semibold text-md w-full md:w-1/2">Polling Unit Leaders</div>
+               <div className="bg-emerald-500 text-white px-6 py-4 rounded-xl shadow-md font-semibold text-md w-full md:w-1/2 transform hover:scale-105 transition-transform duration-300">Ward Coordinators</div>
+               <div className="bg-emerald-500 text-white px-6 py-4 rounded-xl shadow-md font-semibold text-md w-full md:w-1/2 transform hover:scale-105 transition-transform duration-300">Polling Unit Leaders</div>
             </div>
             <div className="h-8 w-1 bg-amber-500 mt-4"></div>
-            <div className="bg-amber-500 text-emerald-950 px-12 py-5 rounded-xl shadow-lg font-black text-2xl w-full max-w-3xl uppercase tracking-widest">Registered Members</div>
+            <div className="bg-amber-500 text-emerald-950 px-12 py-5 rounded-xl shadow-lg font-black text-2xl w-full max-w-3xl uppercase tracking-widest transform hover:scale-105 transition-transform duration-300">Registered Members</div>
           </div>
         </div>
       </section>
@@ -197,15 +252,14 @@ export default function AboutPage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {LEADERSHIP.map((leader, idx) => (
-              <div key={idx} className="bg-gray-50 rounded-2xl overflow-hidden shadow-sm border border-gray-100 group">
+              <div key={idx} className="bg-gray-50 rounded-2xl overflow-hidden shadow-sm border border-gray-100 group hover:shadow-xl transition-shadow duration-300">
                 <div className="h-72 overflow-hidden">
-                  <img src={leader.image} alt={leader.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 grayscale group-hover:grayscale-0" />
+                  <img src={leader.image} alt={leader.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 grayscale group-hover:grayscale-0" />
                 </div>
                 <div className="p-6 bg-white relative -mt-4 rounded-t-2xl border-t border-gray-100">
                   <h4 className="text-xl font-bold text-emerald-950">{leader.name}</h4>
                   <p className="text-amber-600 font-medium mb-4">{leader.role}</p>
                   <div className="flex justify-start space-x-3">
-                    {/* <a href="#" className="p-2 bg-emerald-50 rounded-full hover:bg-emerald-100 text-emerald-800 transition-colors"><Linkedin className="w-4 h-4" /></a> */}
                     <a href="#" className="p-2 bg-emerald-50 rounded-full hover:bg-emerald-100 text-emerald-800 transition-colors"><Mail className="w-4 h-4" /></a>
                   </div>
                 </div>
@@ -227,10 +281,10 @@ export default function AboutPage() {
             <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-1 before:bg-gradient-to-b before:from-emerald-800 before:via-amber-500 before:to-emerald-800">
               {TIMELINE.map((event, idx) => (
                 <div key={idx} className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                  <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-emerald-950 bg-amber-500 text-emerald-950 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                  <div className="flex items-center justify-center w-12 h-12 rounded-full border-4 border-emerald-950 bg-amber-500 text-emerald-950 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10 group-hover:scale-110 transition-transform duration-300">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-emerald-900/40 p-8 rounded-2xl border border-emerald-800/50 backdrop-blur-sm hover:border-amber-500/50 transition-colors">
+                  <div className="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-emerald-900/40 p-8 rounded-2xl border border-emerald-800/50 backdrop-blur-sm hover:border-amber-500/50 hover:-translate-y-1 transition-all duration-300 cursor-pointer">
                     <div className="mb-2">
                       <h4 className="font-black text-amber-400 text-2xl">{event.year}</h4>
                     </div>
@@ -244,7 +298,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* FOOTER */}
+      {/* FOOTER Placeholder */}
   
     </div>
   );

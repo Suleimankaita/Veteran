@@ -7,7 +7,12 @@ import {
   Calendar, Newspaper, Image as ImageIcon, CreditCard, MessageSquare,
    ExternalLink
 } from 'lucide-react';
-
+import hero from '../assets/Member.png'; // Ensure you have this image in your assets folder
+import gallary1 from "../assets/Gl.png"
+import gallary2 from "../assets/gl2.png"
+import gallary3 from "../assets/gl3.png"
+import gallary4 from "../assets/gl4.png"
+// import gallary2 from "../assets/.png"
 // --- Animated Number Counter Component ---
 const AnimatedCounter = ({ value, className }: { value: string, className?: string }) => {
   const ref = useRef<HTMLSpanElement>(null);
@@ -126,9 +131,18 @@ export default function RenewedHopeVeterans() {
      
 
       {/* --- 1. Hero Section --- */}
-      <section id="home" className="relative pt-32 pb-20 md:pt-10 md:pb-20 overflow-hidden bg-[#0b3d2e]">
+      <section id="home" className=" bg-center bg-cover relative pt-32 pb-20 md:pt-10 md:pb-20 overflow-hidden bg-[#0b3d2e]">
         {/* Animated Background Elements */}
-        <div className="pointer-events-none absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, #c9a227 1px, transparent 0)", backgroundSize: "32px 32px" }} />
+             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                  <img 
+                    src={hero} 
+                    // src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80&w=2000" 
+                    alt="Background Network Journey" 
+                    className="w-full h-full object-cover object-center    animate-subtle-pan mix-blend-overlay"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#0F2744]/40 via-[#0F2744]/70 to-[#F8F9FA]"></div>
+                </div>
+        <div className=" pointer-events-none absolute inset-0 opacity-[0.08]" style={{ backgroundImage: `radial-gradient(circle at 2px 2px, #c9a227 1px, transparent 0) `, backgroundSize: "32px 32px" }} />
         <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.4, 0.3] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} className="absolute -right-40 top-[-10%] h-[600px] w-[600px] rounded-full bg-[#c9a227]/20 blur-[100px]" />
         <motion.div animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.6, 0.5] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="absolute -left-40 bottom-[-20%] h-[500px] w-[500px] rounded-full bg-[#062018] blur-[100px]" />
 
@@ -375,44 +389,60 @@ export default function RenewedHopeVeterans() {
       </section>
 
       {/* --- 16. Gallery (Masonry style hover effects) --- */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-end mb-12">
-            <div>
-              <h2 className="text-4xl font-extrabold text-[#0b3d2e] mb-4">Impact Gallery</h2>
-              <p className="text-slate-600">Visualizing our nationwide footprint and events.</p>
-            </div>
-            <button className="hidden sm:flex items-center gap-2 text-[#0b3d2e] font-bold hover:text-[#c9a227]">
-              View All <ArrowRight className="w-4 h-4" />
-            </button>
+  
+    <section className="py-24 bg-slate-50">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        {/* Header Section */}
+        <div className="flex justify-between items-end mb-12">
+          <div>
+            <h2 className="text-4xl font-extrabold text-[#0b3d2e] mb-4">Impact Gallery</h2>
+            <p className="text-slate-600">Visualizing our nationwide footprint and events.</p>
           </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
-            {[
-              { id: 1, col: 'col-span-2', row: 'row-span-2' },
-              { id: 2, col: 'col-span-1', row: 'row-span-1' },
-              { id: 3, col: 'col-span-1', row: 'row-span-1' },
-              { id: 4, col: 'col-span-2', row: 'row-span-1' },
-            ].map((item) => (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }}
-                key={item.id} 
-                className={`relative rounded-3xl overflow-hidden group bg-slate-200 ${item.col} ${item.row}`}
-              >
-                {/* Placeholder background representing image */}
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-300 to-slate-400 group-hover:scale-110 transition-transform duration-700"></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0b3d2e]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-6 left-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                  <div className="bg-white/20 backdrop-blur-md p-3 rounded-full text-white inline-flex mb-2">
-                    <ImageIcon className="w-5 h-5" />
-                  </div>
-                  <h4 className="text-white font-bold">Community Outreach</h4>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <button className="hidden sm:flex items-center gap-2 text-[#0b3d2e] font-bold hover:text-[#c9a227] transition-colors">
+            View All <ArrowRight className="w-4 h-4" />
+          </button>
         </div>
-      </section>
+        
+        {/* Gallery Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+          {[
+            { id: 1, col: 'col-span-2', row: 'row-span-2', img1: hero, img2: gallary1 },
+            { id: 2, col: 'col-span-1', row: 'row-span-1', img1: gallary2, img2: gallary1 },
+            { id: 3, col: 'col-span-1', row: 'row-span-1', img1: gallary3, img: gallary1 },
+            { id: 4, col: 'col-span-2', row: 'row-span-1', img1: gallary4, img2: gallary1 },
+          ].map((item) => (
+            <motion.div 
+              key={item.id} 
+              initial={{ opacity: 0, scale: 0.95 }} 
+              whileInView={{ opacity: 1, scale: 1 }} 
+              viewport={{ once: true }} 
+              transition={{ duration: 0.5 }}
+              className={`relative rounded-3xl overflow-hidden group bg-slate-200 cursor-pointer ${item.col} ${item.row}`}
+            >
+              {/* Main Background Image */}
+              <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
+                <img src={item.img1} alt="Impact background" className="object-cover w-full h-full" />
+              </div>
+
+              {/* Dark Gradient Overlay (Appears on Hover) */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0b3d2e]/90 via-[#0b3d2e]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              </div>
+
+              {/* Hover Content Details */}
+              <div className="absolute bottom-6 left-6 right-6 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 flex items-center gap-3">
+                {/* Secondary Thumbnail / Avatar */}
+                <div className="w-10 h-10 bg-white/20 backdrop-blur-md overflow-hidden rounded-full border border-white/30 shrink-0">
+                  <img src={item.img2} alt="Thumbnail" className="object-cover w-full h-full" />
+                </div>
+                <h4 className="text-white font-bold truncate">Community Outreach</h4>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        
+      </div>
+    </section>
 
       {/* --- 17. CTA / Donate Banner --- */}
       <section id="donate" className="py-20 px-6">

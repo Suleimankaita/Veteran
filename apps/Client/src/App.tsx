@@ -8,6 +8,7 @@ import Our_Structure from "./pages/Our-Structure"
 import Programs from "./pages/Programs";
 import ResourcesPage from "./pages/Resource";
 import Gallery from "./pages/GalleryPage"
+import JoinMembership from "./pages/Join-member"
 const App = () => {
   return (
     <Routes>
@@ -18,6 +19,7 @@ const App = () => {
       <Route path="/our-structure" element={<Our_Structure/>} />
       <Route path="/programs" element={<Programs/>} />
       <Route path="/Resources" element={<ResourcesPage/>} />
+      <Route path="/join-membership" element={<JoinMembership/>} />
       <Route path="/Gallery" element={<Gallery/>} />
       </Route>
     </Routes>

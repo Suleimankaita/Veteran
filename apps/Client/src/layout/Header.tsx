@@ -6,7 +6,7 @@ import {
   Archive, Handshake, Map, Landmark, Flag, MapPin, Menu, X, Sparkles, CheckCircle2,
   ShieldCheck
 } from 'lucide-react';
-import { Navigate, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, Navigate, NavLink, useLocation, useNavigate, useParams } from 'react-router-dom';
 
 interface NavItem {
   label: string;
@@ -125,14 +125,16 @@ const Header = () => {
 
           {/* Action Button */}
           <div className="hidden lg:flex items-center space-x-4">
+            <Link to='/join-membership' className='hover:cursor-pointer'>
             <motion.button 
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="bg-[#0B3B18] hover:bg-emerald-900 text-white px-6 py-2.5 rounded-lg text-sm font-semibold flex items-center shadow-md shadow-emerald-950/10 transition-all duration-300"
+              className="hover:cursor-pointer bg-[#0B3B18] hover:bg-emerald-900 text-white px-6 py-2.5 rounded-lg text-sm font-semibold flex items-center shadow-md shadow-emerald-950/10 transition-all duration-300"
             >
               <User className="w-4 h-4 mr-2 text-amber-400" />
               Join Movement
             </motion.button>
+                </Link>
           </div>
 
           {/* Mobile Menu Toggle */}

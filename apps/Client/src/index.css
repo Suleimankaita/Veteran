@@ -9,6 +9,12 @@
   /* height: 70%; */
 
 }
+.img{
+  background-image: url(./assets/GL.png);
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: darken;
+}
 @keyframes glow {
   from {
     width: 10%;
