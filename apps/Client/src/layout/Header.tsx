@@ -176,10 +176,13 @@ const Header = () => {
                 )}
               </NavLink>
                 ))}
+            <Link to='/join-membership' className='hover:cursor-pointer'>
                 <button className="w-full mt-2 bg-[#0B3B18] text-white py-3 rounded-lg font-semibold flex items-center justify-center shadow-md">
+              
                   <User className="w-4 h-4 mr-2 text-amber-400" />
                   Join Movement
                 </button>
+            </Link>
               </div>
             </motion.div>
           )}
