@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Play, Share2, ArrowRight, X, ChevronLeft, ChevronRight, Calendar, Users, Heart, ExternalLink, Filter, Check, Copy } from 'lucide-react';
-import hero from '../assets/Gl.png';
+import hero from '../assets/GL.png';
 // --- Types ---
 interface Photo {
   id: number;

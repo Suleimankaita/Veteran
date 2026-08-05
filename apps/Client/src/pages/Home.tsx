@@ -8,7 +8,7 @@ import {
    ExternalLink
 } from 'lucide-react';
 import hero from '../assets/Member.png'; // Ensure you have this image in your assets folder
-import gallary1 from "../assets/Gl.png"
+import gallary1 from "../assets/GL.png"
 import gallary2 from "../assets/gl2.png"
 import gallary3 from "../assets/gl3.png"
 import gallary4 from "../assets/gl4.png"
