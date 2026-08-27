@@ -28,10 +28,10 @@ const LEADERSHIP = [
 ];
 
 const TIMELINE = [
-  { year: '2018', title: 'Organization Founded', desc: 'The initial concept and founding members came together to form the core of Renewed Hope Veterans.' },
-  { year: '2019', title: 'First National Conference', desc: 'Held in Abuja to establish structural framework and elect the first interim leadership council.' },
-  { year: '2021', title: 'Nationwide Expansion', desc: 'Successfully opened chapters across all 36 states and the FCT, mobilizing thousands of veterans.' },
-  { year: '2023', title: 'Community Projects Integration', desc: 'Shifted focus to active community development, launching grassroots initiatives nationwide.' },
+  { year: '2026', title: 'Organization Registered', desc: 'Renewed Hope Veterans was formally registered on 14 July 2026, establishing the foundation for a structured national organization dedicated to veterans, civic engagement, and national development.' },
+  { year: '2026', title: 'National Structure', desc: 'The organization began establishing its national leadership and organizational framework to coordinate activities across Nigeria.' },
+  { year: '2026', title: 'State & LGA Coordination', desc: 'The organization began developing its state and local coordination structure to strengthen communication, accountability, and grassroots engagement.' },
+  { year: '2027', title: 'National Engagement', desc: 'The organization continues developing its nationwide structure, community engagement initiatives, communication systems, and veteran-led activities.' },
 ];
 
 // --- ANIMATION VARIANTS ---
@@ -101,7 +101,7 @@ export default function AboutPage() {
 
           {/* Sub-headline */}
           <motion.p variants={fadeUpItem} className="text-lg md:text-xl lg:text-2xl text-emerald-100/90 leading-relaxed font-light max-w-3xl drop-shadow-md">
-            Dedicated to empowering military veterans, strengthening communities, and contributing to national development through leadership, unity, and service.
+            We are an independent organization dedicated to empowering Nigerian military veterans, strengthening communities, and contributing to national development through leadership, unity, civic engagement, and continued service.
           </motion.p>
         </motion.div>
 
@@ -131,10 +131,10 @@ export default function AboutPage() {
               <div className="w-20 h-1 bg-amber-500 rounded"></div>
             </div>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Renewed Hope Veterans was established to bring together retired military personnel and patriotic citizens in support of community development, veteran welfare, and national unity.
+          Renewed Hope Veterans was established as an independent organization dedicated to bringing together Nigerian military veterans and patriotic citizens to promote veteran empowerment, community development, civic participation, and national unity.
             </p>
             <p className="text-lg text-gray-600 leading-relaxed">
-              Built on the values of discipline, sacrifice, and service, the organization continues to empower veterans while contributing meaningfully to Nigeria's future. Our history is rooted in the undeniable truth that those who defended the nation are uniquely positioned to rebuild it.
+              Built on the values of discipline, integrity, unity, and service, the organization provides a platform through which veterans can continue to contribute their experience, leadership, and skills to society. Our story is rooted in the belief that the values and experience gained through service can continue to strengthen communities and contribute meaningfully to Nigeria's future.
             </p>
             
             <div className="grid grid-cols-2 gap-4 pt-4">
@@ -164,10 +164,10 @@ export default function AboutPage() {
         <div className="relative z-10 max-w-4xl mx-auto space-y-8">
           <h2 className="text-4xl lg:text-5xl font-extrabold text-amber-500 uppercase tracking-widest mb-10">Why We Exist</h2>
           <p className="text-3xl lg:text-4xl text-white font-light leading-snug">
-            Military veterans possess <span className="font-bold text-amber-400">experience, discipline, leadership,</span> and <span className="font-bold text-amber-400">sacrifice.</span>
+            Military veterans possess <span className="font-bold text-amber-400">experience, discipline, leadership,resilience and a strong spirit of</span> and <span className="font-bold text-amber-400">service.</span>
           </p>
           <p className="text-xl lg:text-2xl text-emerald-200 font-light leading-relaxed max-w-3xl mx-auto mt-6">
-            These qualities should continue benefiting society long after military service. Renewed Hope Veterans exists to ensure that happens.
+            These qualities can continue to benefit society long after active military service. Renewed Hope Veterans exists to create opportunities for veterans to share their experience, support their communities, and contribute to Nigeria's national development.
           </p>
         </div>
       </section>
@@ -181,7 +181,7 @@ export default function AboutPage() {
             </div>
             <h3 className="text-3xl font-bold text-emerald-950 mb-6 uppercase tracking-wider">Our Vision</h3>
             <p className="text-gray-600 text-lg leading-relaxed">
-              To become Nigeria's most trusted veterans organization, promoting unity, leadership, service, and sustainable national development.
+              A Nigeria where veterans continue to contribute their experience, leadership, and service to stronger communities, national unity, security, and sustainable development.
             </p>
           </div>
           <div className="bg-white p-12 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center text-center hover:shadow-2xl transition-shadow duration-300">
@@ -202,7 +202,7 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-emerald-950">Our Core Values</h2>
             <div className="w-24 h-1 bg-amber-500 mx-auto mt-4 rounded"></div>
-            <p className="text-gray-600 mt-6 max-w-2xl mx-auto text-lg">The foundational principles that guide our organization's actions, decisions, and relationships within the community.</p>
+            <p className="text-gray-600 mt-6 max-w-2xl mx-auto text-lg">The principles that guide our leadership, conduct, relationships, and continued commitment to veterans, communities, and national development.</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {CORE_VALUES.map((val, idx) => (
@@ -221,7 +221,7 @@ export default function AboutPage() {
       <section className="py-24 bg-emerald-50">
         <div className="container mx-auto px-6 lg:px-16 text-center">
           <h2 className="text-4xl font-bold text-emerald-950 mb-6">Organization Structure</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-16">Our hierarchical framework ensures efficient communication, localized execution of projects, and nationwide cohesion.</p>
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-16">Our organizational framework provides clear leadership, accountability, communication, and coordination from the national level through states, LGAs, wards, and local communities.</p>
           
           <div className="flex flex-col items-center max-w-4xl mx-auto">
             <div className="bg-emerald-900 text-white px-10 py-5 rounded-xl shadow-lg font-bold text-xl w-full max-w-sm transform hover:scale-105 transition-transform duration-300">National Chairman</div>
@@ -248,7 +248,7 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-emerald-950">Our Leadership</h2>
             <div className="w-24 h-1 bg-amber-500 mx-auto mt-4 rounded"></div>
-            <p className="text-gray-600 mt-6 max-w-2xl mx-auto text-lg">Meet the dedicated veterans guiding our national movement and ensuring the execution of our core mission.</p>
+            <p className="text-gray-600 mt-6 max-w-2xl mx-auto text-lg">Meet the leaders responsible for guiding the organization, strengthening its structure, and advancing its mission of veteran empowerment, civic engagement, and national development.</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {LEADERSHIP.map((leader, idx) => (

@@ -332,28 +332,82 @@ export default function RenewedHopeVeterans() {
       </section>
 
       {/* --- 11. Impact Statistics (Animated Data Count) --- */}
-      <section id="impact" className="relative py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-[#0b3d2e]"></div>
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-20 mix-blend-overlay"></div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={staggerContainer} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-4">
-            {STATS.map((stat, idx) => (
-              <motion.div key={idx} variants={fadeUp} className="flex flex-col items-center text-center group">
-                <div className="w-16 h-16 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center mb-5 backdrop-blur-md group-hover:-translate-y-2 transition-transform duration-300">
-                  {stat.icon}
-                </div>
-                {/* Apply the custom AnimatedCounter here */}
-                <AnimatedCounter 
-                  value={stat.value} 
-                  className="text-4xl lg:text-5xl font-black text-white mb-2 drop-shadow-md" 
-                />
-                <div className="text-[#c9a227] font-bold text-sm tracking-wide uppercase mt-1">{stat.label}</div>
-                {stat.subLabel && <div className="text-slate-400 text-xs mt-1">{stat.subLabel}</div>}
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+      {/* Mission */}
+<motion.div variants={fadeUp} className="group p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-[#c9a227]/30 transition-all hover:shadow-xl">
+  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+    <Target className="w-6 h-6 text-[#c9a227]" />
+  </div>
+
+  <h3 className="text-2xl font-extrabold text-[#0b3d2e] mb-4">
+    Grassroots Engagement
+  </h3>
+
+  <p className="text-slate-600 text-sm leading-relaxed">
+    Mobilize grassroots civic engagement by connecting Nigerian Armed Forces
+    veterans with communities across the country and encouraging informed
+    participation in the democratic process.
+  </p>
+</motion.div>
+
+{/* Vision */}
+<motion.div variants={fadeUp} className="group p-8 bg-gradient-to-br from-[#0b3d2e] to-[#062018] rounded-3xl text-white shadow-2xl shadow-[#0b3d2e]/20 relative overflow-hidden">
+  <div className="absolute -right-10 -top-10 w-32 h-32 bg-white/5 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700"></div>
+
+  <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center mb-6 border border-white/10 group-hover:scale-110 transition-transform">
+    <Eye className="w-6 h-6 text-[#c9a227]" />
+  </div>
+
+  <h3 className="text-2xl font-extrabold text-white mb-4">
+    National Coordination
+  </h3>
+
+  <p className="text-slate-300 text-sm leading-relaxed">
+    Develop coordinated strategies and communication networks that enable
+    organized civic engagement across communities and polling locations
+    nationwide.
+  </p>
+</motion.div>
+
+{/* Core Values */}
+<motion.div variants={fadeUp} className="group p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-[#c9a227]/30 transition-all hover:shadow-xl">
+  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+    <Heart className="w-6 h-6 text-[#c9a227]" />
+  </div>
+
+  <h3 className="text-2xl font-extrabold text-[#0b3d2e] mb-4">
+    Veteran-Led Structure
+  </h3>
+
+  <ul className="space-y-3 text-slate-600 text-sm font-medium">
+    {[
+      'Verified Service Records',
+      'Disciplined Coordination',
+      'National Representation',
+      'Veteran Leadership'
+    ].map((val) => (
+      <li key={val} className="flex items-center gap-3">
+        <CheckCircle2 className="w-5 h-5 text-[#c9a227]" />
+        {val}
+      </li>
+    ))}
+  </ul>
+</motion.div>
+
+{/* Objectives */}
+<motion.div variants={fadeUp} className="group p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-[#c9a227]/30 transition-all hover:shadow-xl">
+  <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+    <Lightbulb className="w-6 h-6 text-[#c9a227]" />
+  </div>
+
+  <h3 className="text-2xl font-extrabold text-[#0b3d2e] mb-4">
+    Public Awareness
+  </h3>
+
+  <p className="text-slate-600 text-sm leading-relaxed">
+    Promote accurate information and strengthen public understanding of
+    national security, governance, and national development issues.
+  </p>
+</motion.div>
 
       {/* --- 8. Our Structure --- */}
       <section className="py-24 bg-white relative">
