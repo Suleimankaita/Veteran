@@ -12,6 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dotenv.config()
+
 const app=express();
 
 const PORT=process.env.PORT||3500
@@ -26,9 +27,17 @@ app.use(express.static(path.join(__dirname,"Public")))
 
 app.use(express.json())
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, path.join(__dirname, "Public", "Img")),
+  filename: (req, file, cb) => cb(null, `${Date.now()}_${file.originalname}`),
+});
 
-mongoose.connection.once("open",()=>{
+const upload = multer({ storage:storage });
 
+
+
+
+ mongoose.connection.once("open",()=>{
     console.log("connected to mongoDB")
 
     app.listen(PORT,()=>{

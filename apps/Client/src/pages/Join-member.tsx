@@ -441,8 +441,9 @@ export default function RenewedHopeVeterans() {
       event.target.value = '';
       return;
     }
+    const Size=2 * 1024 * 1024
 
-    if (selectedFile.size > 2 * 1024 * 1024) {
+    if (selectedFile.size > Size) {
       setErrors((previous) => ({
         ...previous,
         photo: 'The profile photo must not exceed 2MB.',
