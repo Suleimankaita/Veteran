@@ -13,4 +13,4 @@ const UserInformation =new mongoose.Schema({
     timestamps:true
 })
 
-export default mongoose.model("RHVUserInformation")
+export default mongoose.model("RHVUserInformation",UserInformation)

@@ -7,6 +7,7 @@ import mongoose from "mongoose"
 import path from "path"
 import {connect} from "./Config/Connect.js"
 import { fileURLToPath } from "url";
+import Registration from "./Controllers/Auth/Reg.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,6 +36,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage:storage });
 
 
+
+app.use('/Api/Auth/Reg',Registration)
 
 
  mongoose.connection.once("open",()=>{
