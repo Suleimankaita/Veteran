@@ -10,7 +10,7 @@ import { fileURLToPath } from "url";
 import Registration from "./Controllers/Auth/Reg.js"
 import Login from "./Routes/Login.js"
 import Refresh from "./Routes/Refresh.js"
-
+import Logout from "./Routes/Logout.js"
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -42,8 +42,9 @@ const upload = multer({ storage:storage });
 
 
 app.use('/Api/Auth/Reg',Registration)
-app.use('/Api/Auth',Login)
 app.use('/Api/Auth',Refresh)
+app.use('/Api/Auth',Login)
+app.use('/Api/Auth',Logout)
 
 
  mongoose.connection.once("open",()=>{
