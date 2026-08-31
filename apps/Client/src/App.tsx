@@ -9,9 +9,11 @@ import Programs from "./pages/Programs";
 import ResourcesPage from "./pages/Resource";
 import Gallery from "./pages/GalleryPage"
 import JoinMembership from "./pages/Join-member"
+import Dashbord from "./pages/Dashboard"
 const App = () => {
   return (
     <Routes>
+      <Route path="Dash" element={<Dashbord/>}/>
       <Route element={<Layout/>}>
       <Route path="/" element={<Home/>} />
       <Route path="/about" element={<About/>} />
