@@ -28,7 +28,7 @@ const App = () => {
           }
         />
 
-
+{/* 
         <Route
           path="/"
           element={
@@ -37,7 +37,7 @@ const App = () => {
               replace
             />
           }
-        />
+        /> */}
 
       <Route path="Dash" element={<Dashbord/>}/>
       <Route path="Auth" element={<AuthPage/>}/>
