@@ -1,4 +1,4 @@
-import { Routes,Route } from "react-router-dom";
+import { Routes,Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home"
 import React from 'react'
 import Layout from "./layout/Layout";
@@ -10,10 +10,37 @@ import ResourcesPage from "./pages/Resource";
 import Gallery from "./pages/GalleryPage"
 import JoinMembership from "./pages/Join-member"
 import Dashbord from "./pages/Dashboard"
+import AdminLayout from "./layout/AdminLayout";
+import AdminControlCenter from "./components/admin/AdminControlCenter";
+import AuthPage from "./pages/AuthPage";
+
 const App = () => {
   return (
     <Routes>
+
+
+        <Route
+          path="/admin"
+          element={
+            <AdminLayout>
+              <AdminControlCenter />
+            </AdminLayout>
+          }
+        />
+
+
+        <Route
+          path="/"
+          element={
+            <Navigate
+              to="/admin"
+              replace
+            />
+          }
+        />
+
       <Route path="Dash" element={<Dashbord/>}/>
+      <Route path="Auth" element={<AuthPage/>}/>
       <Route element={<Layout/>}>
       <Route path="/" element={<Home/>} />
       <Route path="/about" element={<About/>} />
