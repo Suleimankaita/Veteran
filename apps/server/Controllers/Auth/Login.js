@@ -81,7 +81,8 @@ const Login = asynchandler(async (req, res) => {
     // 8. Create JWT payload
     const Payload = {
         MemberId: UserFound._id.toString(),
-        Username: UserFound.Username
+        Username: UserFound.Username,
+        Role: UserFound.Role
     };
 
     // 9. Create access token

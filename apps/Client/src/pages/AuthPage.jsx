@@ -3719,10 +3719,12 @@ import {
   ChevronRight,
   CircleCheck,
 } from "lucide-react";
-
+import { useLoginMutation } from "../fetatures/ApiSlice";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Member from "../assets/Member.png";
+import { useDispatch, useSelector } from "react-redux";
+import { Authenticate, SetToken } from "../fetatures/AppSlice";
 
 export default function RHVAuth() {
   /* =========================================================
@@ -3874,6 +3876,8 @@ export default function RHVAuth() {
     informationAccurate: false,
   };
 
+  const [loginUser, { isLoading: isLoginLoading,isSuccess,isError,error }] = useLoginMutation();
+
   /* =========================================================
      STATE
   ========================================================= */
@@ -3947,6 +3951,24 @@ export default function RHVAuth() {
   /* =========================================================
      CLEAN PHOTO URL
   ========================================================= */
+
+  useEffect(()=>{
+    if(isError && error){
+
+      
+      setSubmitState("error");
+
+      setMessage(
+        error?.data?.message ||
+          "An error occurred. Please try again."
+      );
+      // console.log(error)
+        // const fieldErrors = error?.data?.message;
+        // setMessage(fieldErrors);
+        // setLoginErrors("success");
+      
+  }
+},[isError,error])
 
   useEffect(() => {
     return () => {
@@ -4287,15 +4309,16 @@ export default function RHVAuth() {
 
     if (!email) {
       nextErrors.email =
-        "Email address is required.";
-    } else if (
-      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-        email
-      )
-    ) {
-      nextErrors.email =
-        "Please enter a valid email address.";
-    }
+        "Username is required.";
+    } 
+    // else if (
+    //   !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+    //     email
+    //   )
+    // ) {
+    //   nextErrors.email =
+    //     "Please enter a valid email address.";
+    // }
 
     if (!loginForm.password) {
       nextErrors.password =
@@ -4762,10 +4785,17 @@ export default function RHVAuth() {
      LOGIN
   ========================================================= */
 
+  const dispatch=useDispatch()
+
+
+  const m=useSelector(Authenticate);
+
   const handleLogin = async (
     event
   ) => {
     event.preventDefault();
+    
+    
 
     setSubmitState("idle");
     setMessage("");
@@ -4782,38 +4812,11 @@ export default function RHVAuth() {
     setSubmitState("loading");
 
     try {
-      /*
-       * CONNECT YOUR API HERE
-       *
-       * Example:
-       *
-       * const response = await fetch(
-       *   "/api/auth/login",
-       *   {
-       *     method: "POST",
-       *     headers: {
-       *       "Content-Type":
-       *         "application/json",
-       *     },
-       *     credentials: "include",
-       *     body: JSON.stringify({
-       *       email: loginForm.email,
-       *       password:
-       *         loginForm.password,
-       *     }),
-       *   }
-       * );
-       *
-       * const data =
-       *   await response.json();
-       *
-       * if (!response.ok) {
-       *   throw new Error(
-       *     data.message ||
-       *       "Invalid credentials"
-       *   );
-       * }
-       */
+
+        const UserLogn=  await loginUser({
+      Username: loginForm.email,
+      Password: loginForm.password,
+    });
 
       await new Promise(
         (resolve) =>
@@ -4822,17 +4825,26 @@ export default function RHVAuth() {
             1000
           )
       );
+      console.log(UserLogn)
+      if(UserLogn?.data?.success){
+        setSubmitState("success");
+        dispatch(SetToken(UserLogn?.data?.
+accessToken
+))
 
-      setSubmitState("success");
+  console.log(m)
 
-      setMessage(
-        "Login successful. Your authentication API can now be connected here."
-      );
+        setMessage(
+          "Login successful. Your authentication API can now be connected here."
+        );
+
+      }
+
     } catch (error) {
       setSubmitState("error");
 
       setMessage(
-        error?.message ||
+        error?.data?.message ||error?.message ||
           "Unable to sign in. Please try again."
       );
     }
@@ -4989,7 +5001,7 @@ export default function RHVAuth() {
             className="absolute inset-0 w-full h-full object-cover opacity-25"
           />
 
-          <div className="absolute inset-0 bg-gradient-to-br from-[#032e1a] via-[#054226]/95 to-[#032e1a]" />
+          <div className="absolute inset-0 bg-linear-to-br from-[#032e1a] via-[#054226]/95 to-[#032e1a]" />
 
           <div className="relative z-10 min-h-screen p-12 xl:p-16 flex flex-col justify-between text-white">
 
@@ -5300,7 +5312,7 @@ export default function RHVAuth() {
                         htmlFor="login-email"
                         className="block text-xs font-bold text-gray-700 mb-2"
                       >
-                        Email Address
+                        Username
                       </label>
 
                       <div className="relative">
@@ -5319,7 +5331,7 @@ export default function RHVAuth() {
                           }
                           id="login-email"
                           name="email"
-                          type="email"
+                          type="text"
                           autoComplete="email"
                           value={
                             loginForm.email

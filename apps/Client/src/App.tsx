@@ -13,6 +13,7 @@ import Dashbord from "./pages/Dashboard"
 import AdminLayout from "./layout/AdminLayout";
 import AdminControlCenter from "./components/admin/AdminControlCenter";
 import AuthPage from "./pages/AuthPage";
+import SuperAdminDashbord from "./pages/SuperAdmin/RHVSuperAdmin";
 
 const App = () => {
   return (
@@ -38,6 +39,8 @@ const App = () => {
             />
           }
         /> */}
+
+      <Route path="/super-admin" element={<SuperAdminDashbord/>}/>
 
       <Route path="Dash" element={<Dashbord/>}/>
       <Route path="Auth" element={<AuthPage/>}/>

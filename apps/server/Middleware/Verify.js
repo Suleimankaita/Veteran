@@ -55,7 +55,8 @@ const VerifyJWT = (
         // Attach user information to request
         req.user = {
             MemberId: Decoded.MemberId,
-            Username: Decoded.Username
+            Username: Decoded.Username,
+            Role: Decoded.Role
         };
 
         // Continue to controller
