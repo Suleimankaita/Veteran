@@ -6,7 +6,10 @@ const UserInformation =new mongoose.Schema({
     Organization:String,
     Skills:String,
     Qualification:String,
+    dateOfBirth:String,
     realtionship:String,
+    maritalStatus:String,
+    emergencyRelationship:String,
     AreasOfInterest:[String],
 
 },{

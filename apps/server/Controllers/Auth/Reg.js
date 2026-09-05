@@ -9,29 +9,20 @@ import { ConvertName } from '../../utils/NameConverTer.js'
 
     const Registration =asynchandler (async(req,res)=>{
 
-    const {Username,password,firstName,lastName ,phone,Address,UserInformation,PhoneNumber,email,Role,occupation,organization,skills,education,maritalStatus,interests,address,state,lga,ward,country}=req.body
+    const {Username,password,firstName,lastName ,phone,email,Role,occupation,organization,skills,education,maritalStatus,interests,address,state,lga,ward,country,dateOfBirth,emergencyPhone,emergencyRelationship}=req.body
     
-    console.log(req.body);
+    const img=req.file?.filename
 
-    const CheckFields=CheckField({Username,password,firstName,lastName ,phone,Address,UserInformation,PhoneNumber,email,occupation,
-    organization,skills,education,maritalStatus,interests, address,state,lga,ward,country});
-    
-    const UserName=ConvertName(Username);
-    
-    const UserFound=await User.findOne({Username}).exec()
-    
-    if(UserFound)return res.status(409).json({message:"UserName Is Already Exist ",status:409,success:false})
-    
-    if(!CheckFields.success)return res.status(400).json({message:CheckFields.message,status:400,success:false});
+    console.log(img)
 
-    const AddressFields={
-        "HouseNumber":23,
+      const AddressFields={
+        // "HouseNumber":23,
         "StreetName":address,
         "State":state,
         "LocalGov":lga,
         "Ward":ward,
         "country":country,
-        "constactPhone":phone
+        "constactPhone":emergencyPhone
  }
 
 
@@ -41,22 +32,38 @@ import { ConvertName } from '../../utils/NameConverTer.js'
     "Skills":skills,
     "Qualification":education,
     "realtionship":maritalStatus,
+    "emergencyRelationship":emergencyRelationship,
+    "dateOfBirth":dateOfBirth,
     "AreasOfInterest":interests
 
  }
+
+    const CheckFields=CheckField({Username,password,firstName,lastName ,phone,email,...UserInformationFields,...AddressFields});
+    
+    const UserName=ConvertName(Username);
+    
+    const UserFound=await User.findOne({Username:UserName}).exec()
+    console.log(UserFound)
+    console.log(UserName)
+    if(UserFound){
+        return res.status(409).json({message:"UserName Is Already Exist ",status:409,success:false})
+    }
+    if(!CheckFields.success)return res.status(400).json({message:CheckFields.message,status:400,success:false});
+
+  
  
 
     const hashpassword=await bcrypt.hash(password,10);
 
-    const Addressid=await UserAddress.create(Address)
+    const Addressid=await UserAddress.create(AddressFields)
 
-    const UserInformationId=await RHVUserInformation.create(UserInformation)
+    const UserInformationId=await RHVUserInformation.create(UserInformationFields)
 
     const Profile=await RHVProfiles.create({
         Firtname:firstName,
         Lastname:lastName ,
         Password:hashpassword,
-        // profileImg,
+        profileImg:img,
         Address:Addressid?._id,
         UserInformation:UserInformationId?._id,
         PhoneNumber:phone,

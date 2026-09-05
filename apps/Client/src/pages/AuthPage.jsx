@@ -31,7 +31,6 @@ import {
   Loader2,
   Check,
   CheckCircle2,
-  KeyRound,
   UserPlus,
   Calendar,
   Briefcase,
@@ -44,8 +43,9 @@ import { useLoginMutation, useRegMutation } from "../fetatures/ApiSlice";
 import { motion, AnimatePresence } from "framer-motion";
 
 import Member from "../assets/Member.png";
-import { useDispatch, useSelector } from "react-redux";
-import { Authenticate, SetToken } from "../fetatures/AppSlice";
+import { useDispatch } from "react-redux";
+import { SetToken } from "../fetatures/AppSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function RHVAuth() {
   /* =========================================================
@@ -198,8 +198,8 @@ export default function RHVAuth() {
     informationAccurate: false,
   };
 
-  const [loginUser, { isLoading: isLoginLoading,isSuccess,isError,error }] = useLoginMutation();
-  const [RegistrationApi, { isLoading: isReginLoading,isSuccess:isRegSuccess,isError:isRegerror,error:RegError }] = useRegMutation();
+  const [loginUser, { isLoading: isLoginLoading }] = useLoginMutation();
+  const [RegistrationApi, { isLoading: isReginLoading }] = useRegMutation();
 
   /* =========================================================
      STATE
@@ -274,24 +274,6 @@ export default function RHVAuth() {
   /* =========================================================
      CLEAN PHOTO URL
   ========================================================= */
-
-  useEffect(()=>{
-    if(isError && error){
-
-      
-      setSubmitState("error");
-
-      setMessage(
-        error?.data?.message ||
-          "An error occurred. Please try again."
-      );
-      // console.log(error)
-        // const fieldErrors = error?.data?.message;
-        // setMessage(fieldErrors);
-        // setLoginErrors("success");
-      
-  }
-},[isError,error])
 
   useEffect(() => {
     return () => {
@@ -1113,9 +1095,7 @@ export default function RHVAuth() {
   ========================================================= */
 
   const dispatch=useDispatch()
-
-
-  const m=useSelector(Authenticate);
+  const navigate = useNavigate();
 
   const handleLogin = async (
     event
@@ -1145,35 +1125,22 @@ export default function RHVAuth() {
         const UserLogn = await loginUser({
           Username: username,
           Password: loginForm.password,
-        });
+        }).unwrap();
 
-      await new Promise(
-        (resolve) =>
-          setTimeout(
-            resolve,
-            1000
-          )
-      );
-      console.log(UserLogn)
-      if(UserLogn?.data?.success){
-        setSubmitState("success");
-        dispatch(SetToken(UserLogn?.data?.
-accessToken
-))
-
-  console.log(m)
-
-        setMessage(
-          "Login successful. Your authentication API can now be connected here."
-        );
-
+      if (!UserLogn?.success || !UserLogn?.accessToken) {
+        throw new Error(UserLogn?.message || "Login failed. Please try again.");
       }
+
+      dispatch(SetToken(UserLogn.accessToken));
+      setSubmitState("success");
+      setMessage(UserLogn.message || "Login successful. Redirecting...");
+      navigate("/Dash", { replace: true });
 
     } catch (error) {
       setSubmitState("error");
 
       setMessage(
-        error?.data?.message ||error?.message ||
+        error?.data?.message || error?.message ||
           "Unable to sign in. Please try again."
       );
     }
@@ -1239,59 +1206,36 @@ accessToken
         );
       }
 
-      const ms=await RegistrationApi(formData)
-      
-      console.log(ms)
-
-      /*
-       * CONNECT YOUR BACKEND HERE
-       *
-       * Example:
-       *
-       * const response =
-       *   await fetch(
-       *     "/api/auth/register",
-       *     {
-       *       method: "POST",
-       *       body: formData,
-       *       credentials: "include",
-       *     }
-       *   );
-       *
-       * const data =
-       *   await response.json();
-       *
-       * if (!response.ok) {
-       *   throw new Error(
-       *     data.message ||
-       *       "Registration failed"
-       *   );
-       * }
-       */
-
-      console.log(
-        "RHV registration data:",
-        form
-      );
-
-      await new Promise(
-        (resolve) =>
-          setTimeout(
-            resolve,
-            1500
-          )
-      );
+      const registrationResult = await RegistrationApi(formData).unwrap();
 
       setSubmitState("success");
 
       setMessage(
-        "Your RHV membership application has been prepared successfully."
+        registrationResult?.message ||
+          "Your RHV membership application was submitted successfully."
       );
+
+
+         const UserLogn = await loginUser({
+          Username: form.Username,
+          Password: form.password,
+        }).unwrap();
+
+        console.log(UserLogn)
+      if (!UserLogn?.success || !UserLogn?.accessToken) {
+        throw new Error(UserLogn?.message || "Login failed. Please try again.");
+      }
+
+      dispatch(SetToken(UserLogn?.accessToken));
+      setSubmitState("success");
+      setMessage(UserLogn.message || "Login successful. Redirecting...");
+      navigate("/Dash", { replace: true });
+
     } catch (error) {
       setSubmitState("error");
 
       setMessage(
-        error?.message ||
+        error?.data?.message || error?.message ||
           "Registration failed. Please try again."
       );
     }
@@ -1827,14 +1771,12 @@ accessToken
                     <button
                       type="submit"
                       disabled={
-                        submitState ===
-                        "loading"
+                        isLoginLoading || submitState === "loading"
                       }
                       className="w-full bg-[#054226] hover:bg-[#032e1a] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                     >
 
-                      {submitState ===
-                      "loading" ? (
+                      {isLoginLoading || submitState === "loading" ? (
                         <>
                           <Loader2
                             size={20}
@@ -4117,14 +4059,12 @@ accessToken
                         <button
                           type="submit"
                           disabled={
-                            submitState ===
-                            "loading"
+                            isReginLoading || submitState === "loading"
                           }
                           className="flex-1 bg-[#054226] hover:bg-[#032e1a] disabled:opacity-60 disabled:cursor-not-allowed text-white py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
                         >
 
-                          {submitState ===
-                          "loading" ? (
+                          {isReginLoading || submitState === "loading" ? (
                             <>
                               <Loader2
                                 size={
