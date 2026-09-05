@@ -15,6 +15,8 @@ import AdminControlCenter from "./components/admin/AdminControlCenter";
 import AuthPage from "./pages/AuthPage";
 import SuperAdminDashbord from "./pages/SuperAdmin/RHVSuperAdmin";
 import RHVNotFound from "./pages/404";
+import MembersManagement from "./pages/SuperAdmin/Member";
+import Edit from "./pages/SuperAdmin/Editpage";
 
 const App = () => {
   return (
@@ -42,7 +44,8 @@ const App = () => {
         /> */}
 
       <Route path="/super-admin" element={<SuperAdminDashbord/>}/>
-
+      <Route path="/Member" element={<MembersManagement/>}/>
+      <Route path="/Edit" element={<Edit/>}/>
       <Route path="Dash" element={<Dashbord/>}/>
       <Route path="Auth" element={<AuthPage/>}/>
       <Route element={<Layout/>}>
