@@ -6,7 +6,8 @@ const UserAddress=new mongoose.Schema({
         State:String,
         LocalGov:String,
         Ward:String,
-        constactPhone:String
+        constactPhone:String,
+        country:String
 },{
     timestamps:true
 })

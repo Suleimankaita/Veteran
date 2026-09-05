@@ -14,6 +14,7 @@ import AdminLayout from "./layout/AdminLayout";
 import AdminControlCenter from "./components/admin/AdminControlCenter";
 import AuthPage from "./pages/AuthPage";
 import SuperAdminDashbord from "./pages/SuperAdmin/RHVSuperAdmin";
+import RHVNotFound from "./pages/404";
 
 const App = () => {
   return (
@@ -54,6 +55,7 @@ const App = () => {
       <Route path="/join-membership" element={<JoinMembership/>} />
       <Route path="/Gallery" element={<Gallery/>} />
       </Route>
+       <Route path="*" element={<RHVNotFound />} />
     </Routes>
   )
 }

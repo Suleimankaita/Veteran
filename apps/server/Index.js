@@ -41,7 +41,7 @@ const upload = multer({ storage:storage });
 
 
 
-app.use('/Api/Auth/Reg',Registration)
+app.use('/Api/Auth/Reg',upload.single("photo"),Registration)
 app.use('/Api/Auth',Refresh)
 app.use('/Api/Auth',Login)
 app.use('/Api/Auth',Logout)

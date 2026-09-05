@@ -10,9 +10,7 @@ type User = {
 };
 
 // Entity adapter
-const UserAdapter = createEntityAdapter<User>({
-  selectId: (user) => user._id ?? user.id,
-});
+const UserAdapter = createEntityAdapter<User>();
 
 // Initial state
 const initialState = UserAdapter.getInitialState();
@@ -28,18 +26,27 @@ export const UserSlice = Apislice.injectEndpoints({
     }),
 
     Login: builder.mutation<any, LoginTypes>({
-      query: ({Username, Password}) => ({
-        url: "Api/Auth/Login",
+      query: ({ Username, Password }) => ({
+        url: "/Api/Auth/Login",
         method: "POST",
         body: { Username, Password },
       }),
     }),
+    Reg: builder.mutation<any, any>({
+      query: (data) => ({
+        url: "/Api/Auth/Reg",
+        method: "POST",
+        body: data,
+      }),
+    }),
+    
   }),
 });
 
 // Hooks
 export const {
   useLoginMutation,
+  useRegMutation,
   useGetAllUsersQuery,
 } = UserSlice;
 

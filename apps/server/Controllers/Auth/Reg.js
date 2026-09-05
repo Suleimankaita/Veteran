@@ -6,9 +6,16 @@ import CheckField from '../../utils/CheckField.js'
 import UserAddress from '../../model/UserAddress.js'
 import RHVUserInformation from '../../model/RHVUserInformation.js'
 import { ConvertName } from '../../utils/NameConverTer.js'
-const Registration =asynchandler (async(req,res)=>{
-    const {Username,Password,FirstName,LastName,Phone,Address,UserInformation,PhoneNumber,Email,Role}=req.body
-    const CheckFields=CheckField({Username,Password,FirstName,LastName,Phone,Address,UserInformation,PhoneNumber,Email});
+
+    const Registration =asynchandler (async(req,res)=>{
+
+    const {Username,password,firstName,lastName ,phone,Address,UserInformation,PhoneNumber,email,Role,occupation,organization,skills,education,maritalStatus,interests,address,state,lga,ward,country}=req.body
+    
+    console.log(req.body);
+
+    const CheckFields=CheckField({Username,password,firstName,lastName ,phone,Address,UserInformation,PhoneNumber,email,occupation,
+    organization,skills,education,maritalStatus,interests, address,state,lga,ward,country});
+    
     const UserName=ConvertName(Username);
     
     const UserFound=await User.findOne({Username}).exec()
@@ -17,21 +24,43 @@ const Registration =asynchandler (async(req,res)=>{
     
     if(!CheckFields.success)return res.status(400).json({message:CheckFields.message,status:400,success:false});
 
-    const hashpassword=await bcrypt.hash(Password,10);
+    const AddressFields={
+        "HouseNumber":23,
+        "StreetName":address,
+        "State":state,
+        "LocalGov":lga,
+        "Ward":ward,
+        "country":country,
+        "constactPhone":phone
+ }
+
+
+ const UserInformationFields={
+   "Occupation":occupation,
+    "Organization":organization,
+    "Skills":skills,
+    "Qualification":education,
+    "realtionship":maritalStatus,
+    "AreasOfInterest":interests
+
+ }
+ 
+
+    const hashpassword=await bcrypt.hash(password,10);
 
     const Addressid=await UserAddress.create(Address)
 
     const UserInformationId=await RHVUserInformation.create(UserInformation)
 
     const Profile=await RHVProfiles.create({
-        Firtname:FirstName,
-        Lastname:LastName,
+        Firtname:firstName,
+        Lastname:lastName ,
         Password:hashpassword,
         // profileImg,
         Address:Addressid?._id,
         UserInformation:UserInformationId?._id,
-        PhoneNumber,
-        Email
+        PhoneNumber:phone,
+        Email:email
     })
 
     await User.create({
