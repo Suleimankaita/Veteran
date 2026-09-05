@@ -17,7 +17,7 @@ import SuperAdminDashbord from "./pages/SuperAdmin/RHVSuperAdmin";
 import RHVNotFound from "./pages/404";
 import MembersManagement from "./pages/SuperAdmin/Member";
 import Edit from "./pages/SuperAdmin/Editpage";
-
+import Message from "./pages/Message/message";
 const App = () => {
   return (
     <Routes>
@@ -46,8 +46,9 @@ const App = () => {
       <Route path="/super-admin" element={<SuperAdminDashbord/>}/>
       <Route path="/Member" element={<MembersManagement/>}/>
       <Route path="/Edit" element={<Edit/>}/>
-      <Route path="Dash" element={<Dashbord/>}/>
-      <Route path="Auth" element={<AuthPage/>}/>
+      <Route path="/Message" element={<Message/>}/>
+      <Route path="/Dash" element={<Dashbord/>}/>
+      <Route path="/Auth" element={<AuthPage/>}/>
       <Route element={<Layout/>}>
       <Route path="/" element={<Home/>} />
       <Route path="/about" element={<About/>} />
